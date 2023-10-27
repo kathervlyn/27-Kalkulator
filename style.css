@@ -1,0 +1,34 @@
+.calculator-body {
+    border: 5px solid black;
+    width: 412px;
+    border-radius: 2%;
+    background-color: lightslategrey;
+}
+
+.calculator-view {
+    border: 1px solid none;
+    width: 412px;
+    height: 200px;
+    font-size: xx-large;
+}
+
+.calculator-buttons {
+    height: 50px;
+    width: 100px;
+    margin-top: 2px;
+    font-size: x-large;
+    cursor: pointer;
+    border: none;
+    background-color: lightgray;
+    user-select: none;
+}
+
+.memory-btn {
+    width: 100px;
+    height: 20px;
+    margin-top: 2px;
+    cursor: pointer;
+    border: none;
+    background-color: lightgray;
+    user-select: none;
+}

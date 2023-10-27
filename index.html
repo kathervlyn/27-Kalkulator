@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="calculator-body">
+        <div class="calculator-view" id="calculatorView">0</div>
+
+        <button class="memory-btn" onclick="">MS</button>
+        <button class="memory-btn" onclick="">M+</button>
+        <button class="memory-btn" onclick="">MR</button>
+        <button class="memory-btn" onclick="">MC</button><br>
+
+        <button class="calculator-buttons" onclick="calcPress('%')">%</button>
+        <button class="calculator-buttons" onclick="clearButton()">CE</button>
+        <button class="calculator-buttons" onclick="clearButton()">C</button>
+        <button class="calculator-buttons" onclick="deleteLastLetter()">←</button><br>
+
+        <button class="calculator-buttons" onclick="">1/x</button>
+        <button class="calculator-buttons" onclick="calcPress('x²')">x²</button>
+        <button class="calculator-buttons" onclick="calcPress('√')">2√x</button>
+        <button class="calculator-buttons" onclick="calcPress('/')">/</button><br>
+
+        <button class="calculator-buttons" onclick="calcPress('7')">7</button>
+        <button class="calculator-buttons" onclick="calcPress('8')">8</button>
+        <button class="calculator-buttons" onclick="calcPress('9')">9</button>
+        <button class="calculator-buttons" onclick="calcPress('*')">*</button><br>
+
+        <button class="calculator-buttons" onclick="calcPress('4')">4</button>
+        <button class="calculator-buttons" onclick="calcPress('5')">5</button>
+        <button class="calculator-buttons" onclick="calcPress('6')">6</button>
+        <button class="calculator-buttons" onclick="calcPress('-')">-</button><br>
+
+        <button class="calculator-buttons" onclick="calcPress('1')">1</button>
+        <button class="calculator-buttons" onclick="calcPress('2')">2</button>
+        <button class="calculator-buttons" onclick="calcPress('3')">3</button>
+        <button class="calculator-buttons" onclick="calcPress('+')">+</button><br>
+
+        <button class="calculator-buttons" onclick="flipNumberPosOrNeg()">+/-</button>
+        <button class="calculator-buttons" onclick="calcPress('0')">0</button>
+        <button class="calculator-buttons" onclick="calcPress(',')">,</button>
+        <button class="calculator-buttons" onclick="calculateAnswer('=')">=</button>
+    </div>
+    <script>
+        const calcView = document.getElementById("calculatorView");
+
+        function calcPress(value) {
+            if (calcView.innerHTML === "0" || calcView.innerHTML === 'Error') {
+                calcView.innerHTML = value;
+            } else {
+                if (!isNaN(value) && !isNaN(calcView.innerHTML)) {
+                    const currentNumber = calcView.innerHTML.replace(/,/g, '');
+                    calcView.innerHTML = numberWithCommas(currentNumber + value);
+                } else {
+                    calcView.innerHTML += value;
+                }
+            }
+        }
+
+        function clearButton() {
+            calcView.innerHTML = "0";
+        }
+
+        function deleteLastLetter() {
+            const currentValue = calcView.innerHTML;
+
+            if (currentValue.length > 0) {
+                const newValue = currentValue.slice(0, -1);
+                calcView.innerHTML = newValue;
+            }
+        }
+
+        function flipNumberPosOrNeg() {
+            const currentValue = parseFloat(calcView.innerHTML);
+            if (!isNaN(currentValue)) {
+                const newValue = -currentValue;
+                calcView.innerHTML = newValue;
+            }
+        }
+
+        function calculateAnswer(value) {
+            try {
+                const expression = calcView.innerHTML.replace(/,/g, '');
+                calcView.innerHTML = numberWithCommas(eval(expression));
+            } catch (error) {
+                calcView.innerHTML = "Error";
+            }
+        }
+
+        function numberWithCommas(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+    </script>
+</body>
+
+</html>
